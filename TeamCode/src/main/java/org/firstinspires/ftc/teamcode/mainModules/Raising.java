@@ -175,12 +175,12 @@ public class Raising {
                     if (left) {
                         leftServo.setPosition(0);
                     } else {
-                        leftServo.setPosition(0.52);
+                        leftServo.setPosition(1);
                     }
                     if (right) {
                         rightServo.setPosition(1);
                     } else {
-                        rightServo.setPosition(0.48);
+                        rightServo.setPosition(0);
                     }
 
                 }
@@ -194,12 +194,12 @@ public class Raising {
             if (left) {
                 leftServo.setPosition(0);
             } else {
-                leftServo.setPosition(0.52);
+                leftServo.setPosition(1);
             }
             if (right) {
                 rightServo.setPosition(1);
             } else {
-                rightServo.setPosition(0.48);
+                rightServo.setPosition(0);
             }
         }
     }
