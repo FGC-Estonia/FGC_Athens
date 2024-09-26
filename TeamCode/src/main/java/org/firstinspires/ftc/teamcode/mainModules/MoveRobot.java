@@ -79,7 +79,7 @@ public class MoveRobot {
         }if (speed3){
             maxSpeed=1;
         }
-        maxSpeed = Math.min(maxRaisedVelocity, maxSpeed);
+        maxSpeed = Math.min(1/*maxRaisedVelocity*/, maxSpeed);
 
 
 
@@ -93,7 +93,7 @@ public class MoveRobot {
         {
             if (lockToBackWall && turnFieldCentric) {
                 //turn to 0°
-                turnCompensation = (heading-2* Math.PI) * turnMultiplier;
+                turnCompensation = heading;
             } else if (turnFieldCentric) {
                 turnCompensation = heading - wantedAngle;
                 if (turnSlower.isTurn()) {
