@@ -119,6 +119,7 @@ public class EstoniaAthens extends LinearOpMode { //file name is EstoniaAthens.j
             //gyro reset
             {
                 if (gamepad1.right_bumper) {
+                    gamepad1.rumble(0.5, 0.5, 1000);
                     imuManager.resetImu();
                 }
             }
@@ -129,10 +130,13 @@ public class EstoniaAthens extends LinearOpMode { //file name is EstoniaAthens.j
                 if (gamepad2.left_bumper) {
                     if (gamepad2.cross) {
                         target = distance1;
+                        gamepad1.rumble(0.5, 0.5, 250);
                     } else if (gamepad2.square) {
                         target = distance2;
+                        gamepad2.rumble(0.5, 0.5, 250);
                     } else if (gamepad2.triangle) {
                         target = distance3;
+                        gamepad2.rumble(0.5, 0.5, 250);
                     }
                 }
 
