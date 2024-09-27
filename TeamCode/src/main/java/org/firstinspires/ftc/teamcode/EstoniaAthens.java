@@ -124,6 +124,15 @@ public class EstoniaAthens extends LinearOpMode { //file name is EstoniaAthens.j
                     gamepad1.rumble(0.5, 0.5, 1000);
                     imuManager.resetImu();
                 }
+                //create new imu if old one is fucked
+                if (gamepad1_right_trigger.pressed(gamepad1.right_trigger>0.5)){
+                    try {
+                        imuManager = new ImuManager(protect, hardwareMap, telemetry);
+                        gamepad1.rumble(0, 1, 2000);
+                    } catch ( Exception e){
+                        telemetry.addData("error", e);
+                    }
+                }
             }
 
             //move robot
