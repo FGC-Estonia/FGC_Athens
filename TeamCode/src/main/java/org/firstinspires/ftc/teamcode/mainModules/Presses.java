@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.mainModules; //place where the code is located
 
+import com.qualcomm.robotcore.hardware.Gamepad;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,12 +10,16 @@ public class Presses {
     private boolean toggledVariable = false;
     private boolean wasPressedVariable = false;
     private ToggleGroup toggleGroup = null; // Reference to the group
+    private Gamepad gamepad;
 
     // Constructor for individual Presses (not part of a group)
-    public Presses() {}
+    public Presses(Gamepad gamepad) {
+        this.gamepad = gamepad;
+    }
 
     // Constructor for group-managed Presses
-    public Presses(ToggleGroup toggleGroup) {
+    public Presses(ToggleGroup toggleGroup, Gamepad gamepad) {
+        this.gamepad = gamepad;
         this.toggleGroup = toggleGroup;
         this.toggleGroup.addPress(this);
     }
@@ -67,6 +73,7 @@ public class Presses {
             if (toggledVariable) {
                 toggledVariable = false;  // Untoggle if already toggled
             } else {
+                gamepad.rumble(25);
                 if (toggleGroup != null) {
                     toggleGroup.toggle(this);  // Notify the group to toggle this and untoggle others
                 } else {

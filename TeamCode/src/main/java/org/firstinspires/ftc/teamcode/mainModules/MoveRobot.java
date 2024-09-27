@@ -74,10 +74,13 @@ public class MoveRobot {
     ) {
         if (speed1){
             maxSpeed=0.25;
+            telemetry.addData("Gear", "speed1");
         }if (speed2){
             maxSpeed=0.5;
+            telemetry.addData("Gear", "speed2");
         }if (speed3){
             maxSpeed=1;
+            telemetry.addData("Gear", "speed3");
         }
         maxSpeed = Math.min(1/*maxRaisedVelocity*/, maxSpeed);
 

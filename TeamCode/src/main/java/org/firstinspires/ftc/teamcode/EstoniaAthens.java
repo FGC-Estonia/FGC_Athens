@@ -58,29 +58,30 @@ public class EstoniaAthens extends LinearOpMode { //file name is EstoniaAthens.j
         ImuManager imuManager = new ImuManager(protect, hardwareMap, telemetry);
         MoveRobot moveRobot = new MoveRobot(protect, hardwareMap, telemetry, false);
         Raising raising = new Raising(protect, hardwareMap, telemetry);
-        Alignment alignment = new Alignment(protect, hardwareMap, telemetry);
+        Alignment alignment = new Alignment(protect, hardwareMap, telemetry, gamepad1, gamepad2);
         BallPusher ballPusher = new BallPusher(protect, hardwareMap, telemetry);
 
-        Presses gamepad1_left_trigger = new Presses();
-        Presses gamepad1_right_trigger = new Presses();
-        Presses gamepad1_left_bumper = new Presses();
-        Presses gamepad1_right_bumper = new Presses();
+        Presses gamepad1_left_trigger = new Presses(gamepad1);
+        Presses gamepad1_right_trigger = new Presses(gamepad1);
+        Presses gamepad1_left_bumper = new Presses(gamepad1);
+        Presses gamepad1_right_bumper = new Presses(gamepad1);
 
         Presses.ToggleGroup heightSelectToggleGroup = new Presses.ToggleGroup();
-        Presses gamepad2_cross = new Presses(heightSelectToggleGroup);
-        Presses gamepad2_triangle = new Presses(heightSelectToggleGroup);
-        Presses gamepad2_square = new Presses(heightSelectToggleGroup);
-        Presses gamepad2_circle = new Presses(heightSelectToggleGroup);
+        Presses gamepad2_cross = new Presses(heightSelectToggleGroup, gamepad2);
+        Presses gamepad2_triangle = new Presses(heightSelectToggleGroup, gamepad2);
+        Presses gamepad2_square = new Presses(heightSelectToggleGroup, gamepad2);
+        Presses gamepad2_circle = new Presses(heightSelectToggleGroup, gamepad2);
 
         Presses.ToggleGroup speedSelectToggle = new Presses.ToggleGroup();
-        Presses gamepad1_square = new Presses(speedSelectToggle);
-        Presses gamepad1_triangle = new Presses(speedSelectToggle);
-        Presses gamepad1_circle = new Presses(speedSelectToggle);
-        Presses gamepad1_cross = new Presses(speedSelectToggle);
+        Presses gamepad1_square = new Presses(speedSelectToggle, gamepad1);
+        Presses gamepad1_triangle = new Presses(speedSelectToggle, gamepad1);
+        Presses gamepad1_circle = new Presses(speedSelectToggle, gamepad1);
+        Presses gamepad1_cross = new Presses(speedSelectToggle, gamepad1);
         gamepad1_triangle.setToggleTrue();//set deafult value
 
-        Presses gamepad2_dpad_left = new Presses();
-        Presses gamepad2_dpad_right = new Presses();
+        Presses gamepad2_dpad_left = new Presses(gamepad2);
+        Presses gamepad2_dpad_right = new Presses(gamepad2);
+        gamepad2_dpad_right.setToggleTrue();
 
         double maxRaisedVelocity;
 
@@ -92,6 +93,7 @@ public class EstoniaAthens extends LinearOpMode { //file name is EstoniaAthens.j
         double distance3 = 1945.0;
 
         double target = distance1;
+        telemetry.setMsTransmissionInterval(50);
 
         while (opModeIsActive()) { // main loop
 
@@ -126,6 +128,7 @@ public class EstoniaAthens extends LinearOpMode { //file name is EstoniaAthens.j
 
             //move robot
             {
+                /*
                 // change desired distance
                 if (gamepad2.left_bumper) {
                     if (gamepad2.cross) {
@@ -139,21 +142,28 @@ public class EstoniaAthens extends LinearOpMode { //file name is EstoniaAthens.j
                         gamepad2.rumble(0.5, 0.5, 250);
                     }
                 }
-
+                */
                 //position automatically when pressed
+                /*
                 double autoCompensation = 0;
                 boolean lockToBackWall = false;
+*/
                 {
+                    /*
                     if (gamepad1.right_trigger > 0.5) { // if the right trigger is pressed-auto drive
                         lockToBackWall = true;
                         autoCompensation = alignment.alignTarget(target);
-                    }
+                    }*/
 
                     double leftRight = gamepad1.left_stick_x;
                     double imuAngle = imuManager.getYawRadians();
                     double frontBack = -gamepad1.left_stick_y;
                     double turn = gamepad1.right_stick_x;
                     boolean fieldCentric = gamepad1_left_trigger.toggle(gamepad1.left_trigger > 0.5);
+                    if (gamepad1_left_trigger.pressed(gamepad1.left_trigger > 0.5)) {
+                        gamepad1.rumble(1, 1, 250);
+                    }
+                    telemetry.addData("Field Centric", fieldCentric);
                     boolean turnFieldCentric = gamepad1_left_bumper.toggle(gamepad1.left_bumper);
 
                     boolean speed1 = gamepad1_cross.toggle(gamepad1.cross);
@@ -164,10 +174,13 @@ public class EstoniaAthens extends LinearOpMode { //file name is EstoniaAthens.j
                             imuAngle,
                             frontBack, leftRight, turn,
                             fieldCentric, turnFieldCentric,
-                            lockToBackWall, autoCompensation,
+                            false, 0,
+                            /*lockToBackWall, autoCompensation,*/
                             speed1, speed2, speed3,
                             maxRaisedVelocity
                     );
+
+                    alignment.addToTelemetry();
                 }
             }
 

@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.mainModules;
 
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -14,10 +15,13 @@ public class BallPusher {
     private Servo leftPusher;
     private Servo rightPusher;
 
+
+
     public BallPusher(boolean protect, HardwareMap hardwareMap, Telemetry telemetry){
         this.protect = protect;
         this.telemetry = telemetry;
         this.hardwareMap = hardwareMap;
+
         mapMotors();
     }
 
