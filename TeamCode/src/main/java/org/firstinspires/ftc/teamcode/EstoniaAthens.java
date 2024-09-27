@@ -43,7 +43,7 @@ import org.firstinspires.ftc.teamcode.mainModules.Presses;
 public class EstoniaAthens extends LinearOpMode { //file name is EstoniaAthens.java    extends the prebuilt LinearOpMode by rev to run
     @Override
     public void runOpMode() {
-        boolean protect = false; // activate try/catch to protect the code
+        boolean protect = true; // activate try/catch to protect the code
         /*
          * map objects
          * objectName = new ClassName()

@@ -162,11 +162,7 @@ public class Raising {
     }
 
     public void tryMapMotors(){ //reduce failed attempted mappings = reduce useless computing
-        attemptedInitCount++;
-        if (attemptedInitCount < 100000){
-            telemetry.addLine("attempting mapping");
-            mapMotors();
-        }
+        mapMotors();
     }
     public void release(boolean left, boolean right) {
         if (protect) {

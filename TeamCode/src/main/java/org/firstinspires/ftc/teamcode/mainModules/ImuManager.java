@@ -84,12 +84,14 @@ public class ImuManager {
         if (protect) {
             try {
                 lastAngle = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
+                telemetry.addData("imu radians", lastAngle);
                 return lastAngle;
             } catch (Exception errorIMU) {
                 telemetry.addData("IMU ERROR", errorIMU.getMessage());
                 return lastAngle;
             }
         }else {
+            telemetry.addData("imu angle radians", lastAngle);
             lastAngle = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
             return lastAngle;
         }
