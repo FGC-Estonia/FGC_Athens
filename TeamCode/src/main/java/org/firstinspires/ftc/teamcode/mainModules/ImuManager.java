@@ -85,9 +85,15 @@ public class ImuManager {
             try {
                 lastAngle = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
                 telemetry.addData("imu radians", lastAngle);
+                if (Double.isNaN(lastAngle)) {
+                    return 0.0;
+                }
                 return lastAngle;
             } catch (Exception errorIMU) {
                 telemetry.addData("IMU ERROR", errorIMU.getMessage());
+                if (Double.isNaN(lastAngle)) {
+                    return 0.0;
+                }
                 return lastAngle;
             }
         }else {

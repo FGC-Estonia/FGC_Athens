@@ -81,7 +81,6 @@ public class EstoniaAthens extends LinearOpMode { //file name is EstoniaAthens.j
 
         Presses gamepad2_dpad_left = new Presses(gamepad2);
         Presses gamepad2_dpad_right = new Presses(gamepad2);
-        gamepad2_dpad_right.setToggleTrue();
 
         double maxRaisedVelocity;
 
