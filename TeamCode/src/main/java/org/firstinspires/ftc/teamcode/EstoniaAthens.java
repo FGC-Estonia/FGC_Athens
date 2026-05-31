@@ -31,7 +31,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.mainModules.Alignment;
-import org.firstinspires.ftc.teamcode.mainModules.BallPusher;
 import org.firstinspires.ftc.teamcode.mainModules.Raising;
 import org.firstinspires.ftc.teamcode.mainModules.ImuManager;
 import org.firstinspires.ftc.teamcode.mainModules.MoveRobot;
@@ -59,7 +58,6 @@ public class EstoniaAthens extends LinearOpMode { //file name is EstoniaAthens.j
         MoveRobot moveRobot = new MoveRobot(protect, hardwareMap, telemetry, false);
         Raising raising = new Raising(protect, hardwareMap, telemetry);
         Alignment alignment = new Alignment(protect, hardwareMap, telemetry, gamepad1, gamepad2);
-        BallPusher ballPusher = new BallPusher(protect, hardwareMap, telemetry);
 
         Presses gamepad1_left_trigger = new Presses(gamepad1);
         Presses gamepad1_right_trigger = new Presses(gamepad1);
@@ -203,16 +201,6 @@ public class EstoniaAthens extends LinearOpMode { //file name is EstoniaAthens.j
                     );
                 }
 
-                // pushing hands
-                {
-                    boolean leftState = gamepad2_dpad_left.toggle(gamepad2.dpad_left);
-                    boolean rightState = gamepad2_dpad_right.toggle(gamepad2.dpad_right);
-
-                    ballPusher.moveHands(
-                            leftState,
-                            rightState
-                    );
-                }
                 telemetry.update();
 
         }
